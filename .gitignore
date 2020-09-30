@@ -2,3 +2,5 @@
 ch1/front/node_modules/
 ch1/front/package-lock.json
 ch1/front/.next/
+front/.next/
+front/node_modules/
