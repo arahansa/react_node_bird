@@ -1,5 +1,16 @@
 import React, { useState, useCallback } from 'react';
 import { Form, Input, Checkbox, Button }  from 'antd';
+import PropTypes from 'prop-types';
+
+const TextInput = ({value}) => {
+    return (
+        <div>{value}</div>
+    );
+};
+
+TextInput.propTypes = {
+    value: PropTypes.string,
+}
 
 const Signup = () => {
 
@@ -38,7 +49,7 @@ const Signup = () => {
     const onChangePassword = (e) => {
         setPassword(e.target.value);
     };
-    
+
     const onChangePasswordCheck = useCallback((e) => {
         setPasswordError(e.target.value !== password);
         setPasswordCheck(e.target.value);
@@ -49,11 +60,12 @@ const Signup = () => {
         setTerm(e.target.checked);
     }, []);
 
-    
+
 
     return (
         <>
             <Form onFinish={onSubmit} style={{padding: 10}}>
+                <TextInput value="234"/>
                 <div>
                     <label htmlFor="user-id">아이디</label>
                     <br/>
