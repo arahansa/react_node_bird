@@ -1,4 +1,4 @@
-const initialState = {
+export const initialState = {
     isLoggedIn: false,
     user: {},
 };
@@ -15,7 +15,7 @@ const loginAction = {
 
 const logoutAction = {
     type:LOG_OUT,
-}
+};
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -36,4 +36,4 @@ const reducer = (state = initialState, action) => {
     }
 };
 
-
+export default reducer;
