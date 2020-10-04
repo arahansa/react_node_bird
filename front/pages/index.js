@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import PostForm from "../components/PostForm";
 import PostCard from "../components/PostCard";
-// import { useDispatch, useSelector } from "react-redux";
-import { connect } from "react-redux";
-import {loginAction, logoutAction} from "../reducers/user";
+import { useDispatch, useSelector } from "react-redux";
+import { loginAction } from "../reducers/user";
 
 const dummy = {
     isLoggedIn: true,
@@ -19,18 +18,18 @@ const dummy = {
     }],
 };
 
-const Home = ({ user, dispatch, login, logout }) => {
-    // const dispatch = useDispatch();
-    // const { isLoggedIn, user } = useSelector(state => state.user);
+const Home = () => {
+    const dispatch = useDispatch();
+    const { isLoggedIn, user } = useSelector(state => state.user);
     console.log("user :", user);
     useEffect(() => {
-        login()
+        dispatch(loginAction)
     }, []);
 
     return (
         <div>
             { user ? <div>로그인 했습니다 : {user.nickname} </div> : <div>로그아웃 했습니다.</div> }
-            {dummy.isLoggedIn && <PostForm/>}
+            {isLoggedIn && <PostForm/>}
             {dummy.mainPosts.map((c)=>{
                 return (<PostCard key={c} post={c}></PostCard>);
             })}
@@ -38,17 +37,4 @@ const Home = ({ user, dispatch, login, logout }) => {
     );
 };
 
-function mapStateToProps(state){
-    return {
-        user: state.user
-    };
-}
-
-function mapDispatchToProps(dispatch){
-    return {
-        login: () => dispatch(loginAction),
-        logout: () => dispatch(logoutAction),
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default Home;
