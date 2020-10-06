@@ -3,6 +3,7 @@ const dummyUser = {
     Post:[],
     Followings:[],
     Followers:[],
+    signUpData : {}
 };
 
 export const initialState = {
@@ -10,9 +11,13 @@ export const initialState = {
     user: null,
 };
 
+
 export const LOG_IN = "LOG_IN";
 export const LOG_IN_SUCCESS = "LOG_IN_SUCCESS";
 export const LOG_IN_FAILURE = "LOG_IN_FAILURE";
+export const SIGN_UP = "SIGN_UP";
+
+
 export const LOG_OUT = "LOG_OUT";
 
 export const loginAction = {
@@ -24,6 +29,13 @@ export const loginAction = {
 
 export const logoutAction = {
     type:LOG_OUT,
+};
+
+export const signUpAction = (data) => {
+    return {
+        type: SIGN_UP,
+        data: data,
+    };
 };
 
 const reducer = (state = initialState, action) => {
@@ -40,6 +52,12 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 isLoggedIn: false,
                 user: null,
+            }
+        }
+        case SIGN_UP :{
+            return {
+                ...state,
+                signUpData : action.data,
             }
         }
         default:{

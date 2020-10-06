@@ -1,6 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import { Form, Input, Checkbox, Button }  from 'antd';
 import PropTypes from 'prop-types';
+import {signUpAction} from "../reducers/user";
+import { useDispatch } from "react-redux";
 
 const TextInput = ({value}) => {
     return (
@@ -32,8 +34,9 @@ const Signup = () => {
     const [term, setTerm] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
     const [termError, setTermError] = useState(false);
+    const dispatch = useDispatch();
 
-    const onSubmit = useCallback((e) => {
+    const onSubmit = useCallback(() => {
         if(password !== passwordCheck){
             return setPasswordError(true);
         }
@@ -43,6 +46,11 @@ const Signup = () => {
         console.log({
             id,nick,password,passwordCheck,term
         });
+        dispatch(signUpAction({
+            id,
+            password,
+            nick,
+        }));
     }, [password, passwordCheck, term]);
 
     const onChangeNick = (e) => {
@@ -90,7 +98,7 @@ const Signup = () => {
                     {passwordError && <div style={{color:'red'}}>비밀번호가 일치하지 않습니다.</div>}
                 </div>
                 <div>
-                    <Checkbox name="user-term" checked={term} onChange={onChangeTerm}>제로초 말을 잘 들을 것을 동의합니다.</Checkbox>
+                    <Checkbox name="user-term" checked={term} onChange={onChangeTerm}>아라한사 말을 잘 들을 것을 동의합니다.</Checkbox>
                     {termError && <div style={{color:'red'}}>약관에 동의하셔야 합니다.</div>}
                 </div>
                 <div style={{marginTop: 10}}>
