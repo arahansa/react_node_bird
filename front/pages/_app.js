@@ -2,6 +2,7 @@ import React from 'react'
 import Head from 'next/head';
 import AppLayout from '../components/AppLayout';
 import PropTypes from 'prop-types';
+import withReduxSaga from "next-redux-saga";
 import wrapper from '../store/configureStore';
 
 const NodeBird = ({ Component }) => {
@@ -23,4 +24,4 @@ NodeBird.propTypes = {
     store: PropTypes.object,
 };
 
-export default wrapper.withRedux(NodeBird);
+export default wrapper.withRedux(withReduxSaga(NodeBird));
