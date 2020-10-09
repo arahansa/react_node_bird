@@ -26,13 +26,13 @@ function* watchLogin(){
 }
 
 function* helloSaga(){
-    yield take(HELLO_SAGA);
-    console.log("hello saga");
+    console.log("before saga");
+    while(true){
+        yield take(HELLO_SAGA);
+        console.log("hello saga (after)");
+    }
 }
 
 export default function* userSaga(){
-    yield all([
-        fork(watchLogin),
-        helloSaga()
-    ])
+    yield helloSaga();
 }
