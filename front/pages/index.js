@@ -11,7 +11,9 @@ const Home = () => {
     const dispatch = useDispatch();
     console.log("user in index :", user);
     useEffect(() => {
-
+        dispatch({
+            type:"HELLO_SAGA"
+        })
     }, []);
 
     return (
