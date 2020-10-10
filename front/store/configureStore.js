@@ -1,10 +1,11 @@
 import { applyMiddleware, createStore, compose } from 'redux';
-import { createWrapper } from "next-redux-wrapper";
-import { composeWithDevTools } from "redux-devtools-extension";
+import { createWrapper } from 'next-redux-wrapper';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
 
 import reducer from '../reducers';
-import rootSaga from "../sagas";
+import rootSaga from '../sagas';
 
 const configureStore = (context) => {
   console.log(context);
@@ -13,7 +14,7 @@ const configureStore = (context) => {
   const appliedMiddleware = applyMiddleware(...middlewares);
   const enhancer = process.env.NODE_ENV === 'production'
     ? compose(appliedMiddleware)
-    : composeWithDevTools(appliedMiddleware,);
+    : composeWithDevTools(appliedMiddleware);
   const store = createStore(reducer, enhancer);
   store.sagaTask = sagaMiddleware.run(rootSaga);
   return store;

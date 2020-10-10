@@ -1,6 +1,6 @@
-import {all} from "@redux-saga/core/effects";
+import { all } from 'redux-saga/effects';
 
-export default function* postSaga(){
-    yield all([
-    ])
+export default function* postSaga() {
+  yield all([
+  ]);
 }
