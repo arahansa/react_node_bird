@@ -9,6 +9,7 @@ function loginAPI(){
 
 function* login(){
     try{
+        yield fork(logger); // logger 는 내 기록을 로깅하는 함수. 10초 걸림
         yield call(loginAPI);
         yield put({
             type: LOG_IN_SUCCESS,
@@ -22,39 +23,29 @@ function* login(){
 }
 
 function* watchLogin(){
-    while(true){
-        yield take(LOG_IN);
-        yield put({
-            type: LOG_IN_SUCCESS
-        })
-    }
+    yield takeEvery(LOG_IN, login);
 }
 
 function* watchSignUp(){
 
 }
 
-function* watchHello2(){
-    yield takeLatest(HELLO_SAGA, function*(){
-        yield delay(1000);
-        console.log(1);
-        console.log(2);
-        console.log(3);
-        console.log(4);
-    });
+function* hello(){
+    yield delay(1000);
+    console.log(1);
+    console.log(2);
+    console.log(3);
+    console.log(4);
 }
 
-function* watchHello(){
-    console.log("before saga");
-    while(true){
-        yield take(HELLO_SAGA);
-        console.log("hello saga (after)");
-    }
+function* watchHello2(){
+    yield takeLatest(HELLO_SAGA, hello);
 }
+
 
 export default function* userSaga(){
     yield all([
-        watchLogin(),
-        watchHello2()
+        fork(watchLogin),
+        fork(watchHello2)
     ]);
 }
