@@ -43,9 +43,8 @@ function* watchHello(){
 }
 
 export default function* userSaga(){
-    yield all[
-        watchHello(),
+    yield all([
         watchLogin(),
-        watchSignUp()
-    ];
+        watchHello()
+    ]);
 }

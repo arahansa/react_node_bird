@@ -39,7 +39,6 @@ export const signUpAction = (data) => {
 };
 
 const reducer = (state = initialState, action) => {
-    console.log('reducer in :', action);
     switch (action.type) {
         case LOG_IN: {
             return {
